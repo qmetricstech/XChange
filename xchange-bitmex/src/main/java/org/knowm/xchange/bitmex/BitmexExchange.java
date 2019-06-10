@@ -133,14 +133,19 @@ public class BitmexExchange extends BaseExchange implements Exchange {
 
     if (bitmexSymbol.contains(baseSymbol)) {
       counterSymbol = bitmexSymbol.substring(baseSymbol.length(), bitmexSymbol.length());
-    } else {
-      throw new ExchangeException(
-          "Not clear how to create currency pair for symbol: " + bitmexSymbol);
-    }
 
-    activeCurrencyPairs.add(new CurrencyPair(baseSymbol, counterSymbol));
-    activeCurrencies.add(new Currency(baseSymbol));
-    activeCurrencies.add(new Currency(counterSymbol));
+      activeCurrencyPairs.add(new CurrencyPair(baseSymbol, counterSymbol));
+      activeCurrencies.add(new Currency(baseSymbol));
+      activeCurrencies.add(new Currency(counterSymbol));
+    } else {
+
+      System.out.println("Not clear how to create currency pair for symbol: " + bitmexSymbol);
+      //      if (!baseSymbol.equals("XBK")) {
+      //        throw new ExchangeException(
+      //            "Not clear how to create currency pair for symbol: " + bitmexSymbol);
+      //      }
+
+    }
   }
 
   private Integer getPriceScale(List<BitmexTicker> tickers, CurrencyPair cp) {
